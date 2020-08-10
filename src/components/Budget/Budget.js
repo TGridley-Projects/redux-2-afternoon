@@ -6,15 +6,17 @@ import AddPurchase from './../shared/AddPurchase';
 import DisplayPurchases from './../shared/DisplayPurchases';
 import Loading from './../shared/Loading/Loading';
 import Nav from './../shared/Nav';
+import {connect} from 'react-redux'
 import './Budget.css';
 
 
 class Budget extends Component {
 
   render() {
+    const loading = this.props.budget
     return (
       <Background>
-        {true ? <Loading /> : null}
+        {loading ? <Loading /> : null}
         <div className='budget-container'>
           <Nav />
           <div className='content-container'>
@@ -33,4 +35,10 @@ class Budget extends Component {
   }
 }
 
-export default Budget;
+function mapToStateProps(state){
+  return{
+    budget: state.budget
+  }
+}
+
+export default connect(mapToStateProps)(Budget);
